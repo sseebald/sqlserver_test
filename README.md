@@ -6,7 +6,7 @@ Required modules are:
  - puppetlabs/sqlserver
 ```
 
-Tested on PE 3.8.2
+Tested on PE 3.8.2, Windows Server 2012 R2
 
 Classify through console or in site.pp like this:
 ```
