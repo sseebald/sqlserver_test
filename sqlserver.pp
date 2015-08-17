@@ -1,13 +1,13 @@
 class profile::windows::sqlserver 
 (
   $instance,
-  $database,
   $admin_user,
+  $database,
 ) {
 
 #############################
   # Required modules:
-  # - jriviere/windows_isos
+  # - puppetlabs/mount_iso
   # - puppetlabs/sqlserver
 
   # Required files:
@@ -17,6 +17,25 @@ class profile::windows::sqlserver
 
 ##############################
 
+  acl { $iso_path :
+    permissions => [
+      {
+        identity => 'Everyone',
+        rights   => [ 'full' ]
+      },
+      {
+        identity => $::staging::owner,
+        rights   => [ 'full' ]
+      },
+    ],
+    before      => Mount_iso[$iso_path],
+  }
+
+  mount_iso { $iso_path :
+    drive_letter => $iso_drive,
+    before => Sqlserver_instance[$instance],
+  }
+
 ##############################
 # Create the instance
 ##############################
@@ -24,9 +43,10 @@ class profile::windows::sqlserver
   sqlserver_instance { $instance:
     ensure                => present,
     features              => ['SQL'],
-    source                => 'E:\\',
+    source                => $iso_drive,
     sql_sysadmin_accounts => [$admin_user],
     sa_pwd                => 'puppet123',
+    security_mode => 'SQL',
   }
 
 ###############################
@@ -47,9 +67,13 @@ class profile::windows::sqlserver
 ###############################
 
   sqlserver::config { $instance: 
-    admin_user => $admin_user,
+    admin_user => 'sa',
     admin_pass => 'puppet123',
   }
+
+#  sqlserver::login { 'test1':
+#    instance => $instance,
+#  } 
 
 ###############################
 
