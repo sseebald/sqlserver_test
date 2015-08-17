@@ -4,6 +4,7 @@ Required modules are:
 ```
  - puppetlabs/mount_iso, grab from: https://github.com/puppetlabs/puppetlabs-mount_iso
  - puppetlabs/sqlserver
+ - puppetlabs/acl
 ```
 
 Tested on PE 3.8.2, Windows Server 2012 R2
