@@ -2,7 +2,7 @@
 
 Required modules are:
 ```
- - puppetlabs/mount_iso, grab from:
+ - puppetlabs/mount_iso, grab from: https://github.com/puppetlabs/puppetlabs-mount_iso
  - puppetlabs/sqlserver
 ```
 
