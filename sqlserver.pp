@@ -3,6 +3,8 @@ class profile::windows::sqlserver
   $instance,
   $admin_user,
   $database,
+  $iso_path,
+  $iso_drive
 ) {
 
 #############################
