@@ -17,27 +17,6 @@ class profile::windows::sqlserver
 #############################
 
 ##############################
-
-#  acl { $iso_path :
-#    permissions => [
-#      {
-#        identity => 'Everyone',
-#        rights   => [ 'full' ]
-#      },
-#      {
-#        identity => $::staging::owner,
-#        rights   => [ 'full' ]
-#      },
-#    ],
-#    before      => Mount_iso[$iso_path],
-#  }
-
-#  mount_iso { $iso_path :
-#    drive_letter => $iso_drive,
-#    before => Sqlserver_instance[$instance],
-#  }
-
-##############################
 # Create the instance
 ##############################
 
@@ -71,10 +50,6 @@ class profile::windows::sqlserver
     admin_user => 'sa',
     admin_pass => 'puppet123',
   }
-
-#  sqlserver::login { 'test1':
-#    instance => $instance,
-#  } 
 
 ###############################
 
